@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waypoint — AI Travel Concierge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ═══ NAV ═══════════════════════════════════════════════ -->
+<nav>
+  <div class="logo">Way<span>point</span></div>
+  <button class="burger" id="burgerBtn" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+  <div class="links" id="navLinks">
+    <a href="#planner">AI Planner</a>
+    <a href="#book">Book</a>
+    <a href="#experiences">Experiences</a>
+    <a href="#blog">Travel Notes</a>
+    <a href="#monetize" class="btn ghost" style="display:inline-block;">Earn With Us</a>
+    <a class="profile-trigger" id="profileTrigger" style="display:inline-flex;margin-top:12px;">
+      <span class="avatar" id="avatarInitial">?</span>
+      <span id="profileLabel">My travel profile</span>
+    </a>
+  </div>
+</nav>
+
+<!-- ═══ PROFILE OVERLAY ════════════════════════════════════ -->
+<div class="profile-overlay" id="profileOverlay">
+  <div class="profile-panel">
+    <button class="close-x" id="closeProfile">&times;</button>
+    <h3>Your travel profile</h3>
+    <p class="sub">Saved on this device — the AI uses these details automatically every time you plan a trip.</p>
+
+    <label>Your name</label>
+    <input id="p-name" placeholder="e.g. Alex">
+
+    <div class="profile-row2">
+      <div>
+        <label>Home airport</label>
+        <input id="p-airport" placeholder="e.g. LHR — Heathrow">
+      </div>
+      <div>
+        <label>Home currency</label>
+        <select id="p-currency">
+          <option>GBP — £</option>
+          <option>USD — $</option>
+          <option>EUR — €</option>
+          <option>AUD — A$</option>
+          <option>CAD — C$</option>
+          <option>JPY — ¥</option>
+        </select>
+      </div>
+    </div>
+
+    <label>Preferred flight class</label>
+    <div class="chip-group" data-group="flightClass">
+      <div class="chip" data-value="Economy">Economy</div>
+      <div class="chip" data-value="Premium Economy">Premium Economy</div>
+      <div class="chip" data-value="Business">Business</div>
+      <div class="chip" data-value="First">First</div>
+    </div>
+
+    <label>Travel pace</label>
+    <div class="chip-group" data-group="pace">
+      <div class="chip" data-value="Relaxed — few activities, lots of downtime">Relaxed</div>
+      <div class="chip" data-value="Balanced — mix of activities and free time">Balanced</div>
+      <div class="chip" data-value="Packed — see and do as much as possible">Packed</div>
+    </div>
+
+    <label>Dietary needs</label>
+    <div class="chip-group" data-group="diet" data-multi="true">
+      <div class="chip" data-value="Vegetarian">Vegetarian</div>
+      <div class="chip" data-value="Vegan">Vegan</div>
+      <div class="chip" data-value="Halal">Halal</div>
+      <div class="chip" data-value="Gluten-free">Gluten-free</div>
+      <div class="chip" data-value="No restrictions">No restrictions</div>
+    </div>
+
+    <label>Accessibility needs</label>
+    <input id="p-accessibility" placeholder="e.g. step-free access required">
+
+    <label>Favourite airlines / hotel chains</label>
+    <input id="p-loyalty" placeholder="e.g. British Airways, Marriott Bonvoy">
+
+    <label>Anything else the AI should always know about you?</label>
+    <textarea id="p-notes" rows="3" placeholder="e.g. travelling with two kids under 8, prefer boutique hotels, allergic to shellfish"></textarea>
+
+    <div class="profile-actions">
+      <button class="btn-secondary" id="clearProfile" type="button">Clear profile</button>
+      <button class="btn" id="saveProfile" type="button">Save profile</button>
+    </div>
+  </div>
+</div>
+<div class="saved-toast" id="savedToast">✓ Profile saved on this device</div>
+
+
+<!-- ═══ HERO ════════════════════════════════════════════════ -->
+<section class="hero" style="padding-top:64px;">
+  <div>
+    <div class="eyebrow">AI-Native Travel Concierge</div>
+    <h1>Tell the AI your trip. <em>It builds the boarding pass.</em></h1>
+    <p>Waypoint's AI plans full, personalised itineraries — day by day, timed to the hour — then gives you one-tap links to book every hotel and experience.</p>
+    <div class="cta-row">
+      <a href="#planner" class="btn">Plan my trip with AI</a>
+      <a href="#experiences" class="btn ghost">Browse experiences</a>
+    </div>
+  </div>
+  <div class="pass">
+    <div class="pass-main">
+      <div class="pass-row">
+        <div>
+          <div class="mono" style="opacity:0.5;font-size:0.7rem;">FROM</div>
+          <div class="city">London</div>
+          <div class="code">LON</div>
+        </div>
+        <div class="pass-arrow">✈</div>
+        <div>
+          <div class="mono" style="opacity:0.5;font-size:0.7rem;">TO</div>
+          <div class="city">Kyoto</div>
+          <div class="code">KIX</div>
+        </div>
+      </div>
+      <div class="pass-meta">
+        <div><label>Passenger</label>You</div>
+        <div><label>Trip Type</label>AI-Personalised</div>
+        <div><label>Class</label>Full Itinerary</div>
+        <div><label>Duration</label>9 Days</div>
+        <div><label>Status</label>Ready to Book</div>
+        <div><label>Gate</label>Scroll ↓</div>
+      </div>
+    </div>
+    <div class="pass-stub">
+      <div class="mono">WAYPOINT</div>
+      <div class="stub-code mono">AI · 0042</div>
+      <div class="mono">VALID&nbsp;ANYWHERE</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ AI PLANNER ══════════════════════════════════════════ -->
+<section id="planner">
+  <div class="section-head">
+    <div class="eyebrow">Step One</div>
+    <h2>Build a full itinerary with Claude AI</h2>
+    <p>Describe your trip — the AI returns a personalised day-by-day plan with timed activities, restaurant picks, and direct booking links for hotels and experiences.</p>
+  </div>
+
+  <div class="planner">
+    <div class="planner-form">
+      <label>Destination</label>
+      <input id="destination" placeholder="e.g. Kyoto, Japan" value="Kyoto, Japan">
+
+      <div class="row2">
+        <div>
+          <label>Trip length (days)</label>
+          <input id="days" type="number" min="1" max="21" value="5">
+        </div>
+        <div>
+          <label>Travellers</label>
+          <input id="travellers" type="number" min="1" max="12" value="2">
+        </div>
+      </div>
+
+      <label>Budget level</label>
+      <select id="budget">
+        <option>Backpacker</option>
+        <option selected>Mid-range</option>
+        <option>Luxury</option>
+      </select>
+
+      <label>Travel style / interests</label>
+      <textarea id="interests" rows="3" placeholder="e.g. food, temples, hiking, photography">Food markets, historic temples, a day trip into nature, photography spots</textarea>
+
+      <label>Anything else? (optional)</label>
+      <textarea id="notes" rows="2" placeholder="dietary needs, special occasions, accessibility..."></textarea>
+
+      <button class="btn" id="generateBtn">Generate my itinerary</button>
+    </div>
+
+    <div class="planner-result" id="result">
+      <div class="placeholder">
+        <div class="stamp">Awaiting<br>Itinerary</div>
+        <p style="max-width:280px;font-size:0.92rem;">Fill in your trip details and the AI will draft a complete day-by-day plan here, with booking links for every hotel and experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══ COMPARE & BOOK ══════════════════════════════════════ -->
+<section id="book">
+  <div class="section-head">
+    <div class="eyebrow">Step Two</div>
+    <h2>Book with our trusted partners</h2>
+    <p>Every recommendation links to live results on our partner platforms. You keep your loyalty points — we earn a small referral fee at no extra cost to you.</p>
+  </div>
+  <div class="partner-grid" id="partnerGrid">
+    <!-- Built by app.js from PARTNERS in data.js -->
+  </div>
+</section>
+
+
+<!-- ═══ EXPERIENCES ══════════════════════════════════════════ -->
+<section id="experiences">
+  <div class="section-head">
+    <div class="eyebrow">Curated</div>
+    <h2>Top-rated experiences</h2>
+    <p>Every AI itinerary surfaces matching GetYourGuide experiences automatically. Here are some popular picks.</p>
+  </div>
+  <div class="grid3" id="experiencesGrid">
+    <!-- Built by app.js from FEATURED_EXPERIENCES in data.js -->
+  </div>
+</section>
+
+
+<!-- ═══ EARN WITH US (MONETIZATION) ═════════════════════════ -->
+<section id="monetize">
+  <div class="section-head">
+    <div class="eyebrow">For the Operator</div>
+    <h2>How Waypoint earns</h2>
+    <p>Every revenue stream below is built into the app already — you just need to add your affiliate IDs in data.js.</p>
+  </div>
+  <div class="monetize-list" id="monetizeList">
+    <!-- Built by app.js from MONETIZE_ITEMS in data.js -->
+  </div>
+</section>
+
+
+<!-- ═══ BLOG / LINKTREE ══════════════════════════════════════ -->
+<section id="blog">
+  <div class="section-head" style="margin:0 auto 56px;text-align:center;">
+    <div class="eyebrow" style="margin:0 auto 18px;justify-content:center;">Travel Notes</div>
+    <h2>Our travel blog &amp; links</h2>
+    <p>Follow along and find every guide in one place.</p>
+  </div>
+  <div class="linktree">
+    <div class="lt-header">
+      <div class="stamp">Way<br>point</div>
+      <h3 style="margin-top:10px;">@waypointtravel</h3>
+    </div>
+    <!-- Built by app.js from BLOG_LINKS in data.js -->
+    <div id="blogLinks"></div>
+  </div>
+</section>
+
+
+<!-- ═══ CHECKOUT OVERLAY ════════════════════════════════════ -->
+<div class="checkout-overlay" id="checkoutOverlay">
+  <div class="checkout-panel" id="checkoutPanel">
+    <button class="close-x" id="closeCheckout">&times;</button>
+    <div id="checkoutContent"></div>
+  </div>
+</div>
+
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <div>Waypoint — planned by AI, booked by you.</div>
+  <div class="mono">AI itineraries are suggestions only. The Waypoint fee covers our planning &amp; concierge service — flights, hotels and activities are booked through our partner platforms. Always verify prices and availability before travelling.</div>
+</footer>
+
+
+<!-- ═══ CHATBOT ════════════════════════════════════════════ -->
+
+<!-- Floating bubble -->
+<button class="chat-bubble" id="chatBubble" aria-label="Open AI travel assistant">
+  ✈
+  <span class="unread show" id="chatUnread"></span>
+</button>
+
+<!-- Chat window -->
+<div class="chat-window" id="chatWindow" role="dialog" aria-label="Waypoint AI assistant">
+  <div class="chat-header">
+    <div class="chat-avatar">W</div>
+    <div class="chat-title">
+      <strong>Waypoint AI</strong>
+      <span>Travel assistant · powered by Claude</span>
+    </div>
+    <button class="chat-close" id="chatClose" aria-label="Close chat">&times;</button>
+  </div>
+
+  <div class="chat-messages" id="chatMessages"></div>
+
+  <div class="chat-quick-replies" id="chatQuickReplies"></div>
+
+  <div class="chat-input-row">
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="Ask anything about your trip…"
+      autocomplete="off"
+      maxlength="500"
+    >
+    <button class="chat-send" id="chatSend" aria-label="Send" disabled>➤</button>
+  </div>
+</div>
+
+<!-- Scripts: data.js first (defines constants), then app.js (uses them) -->
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
