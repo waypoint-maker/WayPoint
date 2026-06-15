@@ -73,20 +73,20 @@ const AffiliateLinks = {
    2. Create a project → Add a web app
    3. Copy the config object shown and paste it below
    ============================================================ */
-const FIREBASE_CONFIG = {
-  apiKey:            'YOUR_API_KEY',
-  authDomain:        'YOUR_PROJECT.firebaseapp.com',
-  projectId:         'YOUR_PROJECT_ID',
-  storageBucket:     'YOUR_PROJECT.appspot.com',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId:             'YOUR_APP_ID',
+const firebaseConfig = {
+  apiKey: "AIzaSyCOYflzZRDc8AYunmFsQaozDJ4N0Mv2VRU",
+  authDomain: "waypoint-claude-ai.firebaseapp.com",
+  projectId: "waypoint-claude-ai",
+  storageBucket: "waypoint-claude-ai.firebasestorage.app",
+  messagingSenderId: "510071995311",
+  appId: "1:510071995311:web:fd7b95dc89484b11090d5a"
 };
 
 /* ============================================================
    BLOG / LINKTREE LINKS — update with your real URLs
    ============================================================ */
 const BLOG_LINKS = [
-  { emoji: '📍', label: 'Latest post — 7 Days in Kyoto', href: '#' },
+  { emoji: '📍', label: 'Latest post — 7 Days in Tokyo', href: '#' },
   { emoji: '🎒', label: 'Packing guides',                 href: '#' },
   { emoji: '🏨', label: 'Hotel reviews',                  href: '#' },
   { emoji: '🎟️', label: 'Best GetYourGuide experiences',  href: '#' },
